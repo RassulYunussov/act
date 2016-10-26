@@ -3,6 +3,7 @@
     ViewData["Title"] = "Список Актов";
 }
 <H1>Список актов</H1>
+<hr>
 <table class="table table-bordered" width="100%">
     
 			  <tr>
@@ -23,8 +24,8 @@
          
             <td> 
                 <a asp-action="View" asp-route-id="@item.Id">@item.DocumentNumber</a>
-                <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
-                <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-remove"></span></a>
+                <a asp-action="Edit" asp-route-id="@item.Id"><span title="Редактировать" class="glyphicon glyphicon-edit"></span></a>
+                <a asp-action="Delete" asp-route-id="@item.Id"><span title="Удалить" class="glyphicon glyphicon-remove"></span></a>
             </td>
             <td>@item.Date.ToString("dd/MM/yyyy")
             </td>

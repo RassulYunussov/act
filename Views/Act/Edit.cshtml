@@ -1,6 +1,8 @@
 @model act.Models.Act
 <section>
 		<article>
+		<H1>Редактирование Акта</H1>
+		<hr>
 		<form asp-action="edit" method="post">
 		<div class="container">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -90,8 +92,21 @@
 			    <td align="center">7</td>
 			    <td align="center">8</td>
 			  </tr>
+			  @foreach(var s in @Model.Services)
+			  {
+				  <tr>
+				    <td align="center"><a asp-action="ServiceDelete" asp-route-id="@Model.Id" asp-route-serviceid="@s.Id"><span title="Удалить" class="glyphicon glyphicon-remove"></span></a></td>
+					<td>@s.Name</td> 
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right">@s.Amount</td>
+					<td align="right">@s.Price</td>
+					<td align="right">@s.Total</td>
+				  </tr>
+			  }
 			  <tr>
-			    <td align="center"> </td>
+			    <td align="center"><a asp-action="ServiceAdd" asp-route-id="@Model.Id"><span title="Добавить услугу" class="glyphicon glyphicon-plus"></span></a></td>
 			    <td align="center"> </td> 
 			    <td align="center"> </td>
 			    <td align="center"> </td>

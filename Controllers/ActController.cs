@@ -7,15 +7,21 @@ using act.Models;
 using act.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ViewModels;
 
 namespace act.Controllers
 {
     public class ActController:Controller
     {
         ApplicationDbContext _ctx;
+        List<Service> services = new List<Service>();
         public ActController (ApplicationDbContext ctx)
         {
           _ctx = ctx;
+          services.Add(new Service(){Id = 1, Name = "Service 1", Price = 10.0M, Measure = "ед."});
+          services.Add(new Service(){Id = 2, Name = "Service 2", Price = 20.0M, Measure = "шт."});
+          services.Add(new Service(){Id = 3, Name = "Service 3", Price = 30.0M, Measure = "ед."});
+          services.Add(new Service(){Id = 4, Name = "Service 4", Price = 40.0M, Measure = "ед."});
         }
         public async Task<IActionResult> Index()
         {
@@ -25,17 +31,18 @@ namespace act.Controllers
         {
             if(id==null)
                 return NotFound();
-            var act = await _ctx.Acts.SingleOrDefaultAsync(x=>x.Id==id);
+            var act = await _ctx.Acts.Include(a=>a.Services).SingleOrDefaultAsync(x=>x.Id==id);
             if(act==null)
                 return NotFound();
             return View(act);
         }
         public IActionResult Create()
         {
+            ViewBag.services = services;
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Act act)
+        public async Task<IActionResult> Create([Bind("ClientName,SupplierName,DocumentNumber,Date,ClientBin,SupplierBin")]Act act, IEnumerable<ServiceViewModel> service)
         {               
             if(ModelState.IsValid)
             {
@@ -53,6 +60,14 @@ namespace act.Controllers
                         return View(act);
                     }   
                 }
+                foreach(var s in service)
+                {
+                    if(s.Checked)
+                    {
+                        ActService actService = new ActService(){Name=this.services[s.Id].Name,Price=this.services[s.Id].Price,Amount=s.Amount};
+                        act.Services.Add(actService);
+                    }
+                }
                 _ctx.Add(act);
                 await _ctx.SaveChangesAsync();
                 return RedirectToAction("index");
@@ -63,7 +78,7 @@ namespace act.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var act = await _ctx.Acts.SingleOrDefaultAsync(x=>x.Id==id);
+            var act = await _ctx.Acts.Include(a=>a.Services).SingleOrDefaultAsync(x=>x.Id==id);
             if(act==null)
                 return NotFound();
             return View(act);
@@ -108,6 +123,13 @@ namespace act.Controllers
                 return RedirectToAction("index");
             }
            
+        }
+        public async Task<IActionResult> ServiceDelete(int id,int serviceId)
+        {
+            ActService actService = await _ctx.ActServices.SingleAsync(s=>s.Id==serviceId);
+            _ctx.ActServices.Remove(actService);
+            await _ctx.SaveChangesAsync();
+            return RedirectToAction("edit",new {id=id});
         }
     }
 }

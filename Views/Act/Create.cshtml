@@ -1,6 +1,8 @@
 @model act.Models.Act
 <section>
 		<article>
+		<H1>Создание Акта</H1>
+		<hr>
 		<form asp-action="create" method="post">
 		<div class="container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -90,6 +92,41 @@
 			    <td align="center">7</td>
 			    <td align="center">8</td>
 			  </tr>
+				@if(@Model==null)
+				{
+					int counter = 0;
+					@foreach(var s in ViewBag.services)
+					{
+						<tr>
+							<td align="center"><input type="hidden" name="service[@counter].Id" value="@counter"/><input  type="checkbox" name="service[@counter].Checked" checked value="true"/></td>
+							<td>@s.Name</td> 
+							<td><input type="date" style="text-align:right;" name="service[@counter].Date" value="@System.DateTime.Now.ToString("yyyy-MM-dd")"/></td>
+							<td><input type="text" name="service[@counter].Science" /></td>
+							<td align="center">@s.Measure</td>
+							<td align="right"><input type="number" style="text-align:right;"  name="service[@counter].Amount" value="1"/></td>
+							<td align="right">@s.Price</td>
+							<td align="right"></td>
+						</tr>
+						counter++;
+					}
+				}
+				else
+				{
+					@foreach(var s in @Model.Services)
+					{
+						<tr>
+							<td align="center">@s.Id</td>
+							<td>@s.Name</td> 
+							<td></td>
+							<td></td>
+							<td></td>
+							<td align="right">@s.Amount</td>
+							<td align="right">@s.Price</td>
+							<td align="right">@s.Total</td>
+						</tr>
+					}
+				}
+
 			  <tr>
 			    <td align="center"> </td>
 			    <td align="center"> </td> 

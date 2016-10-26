@@ -8,8 +8,8 @@ using act.Data;
 namespace act.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161025163255_Initial")]
-    partial class Initial
+    [Migration("20161026084932_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace act.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int>("DocumentNumber");
+                    b.Property<int?>("DocumentNumber");
 
                     b.Property<string>("SupplierBin");
 
@@ -36,6 +36,33 @@ namespace act.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Acts");
+                });
+
+            modelBuilder.Entity("act.Models.ActService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ActId");
+
+                    b.Property<int>("Amount");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActId");
+
+                    b.ToTable("ActService");
+                });
+
+            modelBuilder.Entity("act.Models.ActService", b =>
+                {
+                    b.HasOne("act.Models.Act")
+                        .WithMany("Services")
+                        .HasForeignKey("ActId");
                 });
         }
     }

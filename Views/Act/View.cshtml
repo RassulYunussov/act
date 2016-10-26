@@ -1,6 +1,8 @@
 @model act.Models.Act
 <section>
 		<article>
+		<H1>Просмотр Акта</H1>
+		<hr>
 		<form asp-action="create" method="post">
 		<div class="container">
 			<div class="row">
@@ -37,7 +39,6 @@
 		    </div>
 		     <div class="row">
 			    <div class="col-md-8">
-			    	
 			    </div>
 			 	<div class="col-md-4">
 			    	<div class="container-fluid">
@@ -86,6 +87,23 @@
 			    <td align="center">7</td>
 			    <td align="center">8</td>
 			  </tr>
+				@{
+					
+				  int counter = 1;
+					@foreach(var s in @Model.Services)
+					{
+						<tr>
+							<td align="center">@(counter++)</td>
+						<td>@s.Name</td> 
+						<td></td>
+						<td></td>
+						<td></td>
+						<td align="right">@s.Amount</td>
+						<td align="right">@s.Price</td>
+						<td align="right">@s.Total</td>
+						</tr>
+					}
+				}
 			  <tr>
 			    <td align="center"> </td>
 			    <td align="center"> </td> 
@@ -94,7 +112,7 @@
 			    <td align="center">Итого</td>
 			    <td align="center"> </td>
 			    <td align="center">x</td>
-			    <td align="center"><b></b></td>
+			    <td align="right"><b>@Model.Total</b></td>
 			  </tr>
 			</table>
 		</div>
