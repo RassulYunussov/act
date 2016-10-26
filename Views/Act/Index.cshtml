@@ -1,0 +1,47 @@
+@model IEnumerable<act.Models.Act>
+@{
+    ViewData["Title"] = "Список Актов";
+}
+<H1>Список актов</H1>
+<table class="table table-bordered" width="100%">
+    
+			  <tr>
+			    <th rowspan="2" valign="top" style="text-align:center;" width="10%">Номер документа</th>
+			    <th rowspan="2" valign="top" style="text-align:center;" width="10%">Дата акта</th> 
+			    <th colspan="2" valign="top" style="text-align:center;">Клиент</th>
+                <th colspan="2" valign="top" style="text-align:center;">Заказчик</th>
+			  </tr>
+              <tr>
+                  <th valign="top" style="text-align:center;">Наименование</th>
+			      <th valign="top" style="text-align:center;" width="10%">Бин</th>
+                  <th valign="top" style="text-align:center;">Наименование</th>
+			      <th valign="top" style="text-align:center;" width="10%">Бин</th>
+              </tr> 
+@foreach (var item in Model)
+{
+        <tr>
+         
+            <td> 
+                <a asp-action="View" asp-route-id="@item.Id">@item.DocumentNumber</a>
+                <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
+                <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-remove"></span></a>
+            </td>
+            <td>@item.Date.ToString("dd/MM/yyyy")
+            </td>
+            <td>@item.ClientName
+            </td>
+            <td>@item.ClientBin
+            </td>
+            <td>@item.SupplierName
+            </td>
+            <td>@item.SupplierBin
+            </td>
+        </tr>
+}
+</table>
+<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a asp-action="create" class="btn btn-default">Создать новый акт</a>
+            </div>
+</div>
+

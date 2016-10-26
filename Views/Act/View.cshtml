@@ -1,0 +1,110 @@
+@model act.Models.Act
+<section>
+		<article>
+		<form asp-action="create" method="post">
+		<div class="container">
+			<div class="row">
+			    <div class="col-md-8">
+						<div class="form-group">
+						    <label for="customer">Заказчик</label>
+						    <input type="text" class="form-control" asp-for="ClientName" readonly>
+						</div> 
+			    </div>
+				<div class="col-md-4">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">ИИН/БИН</label>
+					    <input type="text" class="form-control" asp-for="ClientBin"  readonly>
+					  </div>
+			    </div>	
+			    <div class="col-md-8">
+						<div class="form-group">
+						    <label for="suplier">Исполнитель</label>
+						    <input type="text" class="form-control" asp-for="SupplierName" readonly>
+						</div> 
+			    </div>
+				<div class="col-md-4">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">ИИН/БИН</label>
+					    <input type="text" class="form-control" asp-for="SupplierBin" readonly">
+					  </div>
+			    </div>	
+		    </div>
+		    <div class="row">
+			    <div class="col-md-8" style="text-align:center">
+			    	<span>Акт выполненных работ (оказанных услуг)</span>
+			    </div>
+
+		    </div>
+		     <div class="row">
+			    <div class="col-md-8">
+			    	
+			    </div>
+			 	<div class="col-md-4">
+			    	<div class="container-fluid">
+			    	<div class="row">
+			    	  <div class="col-xs-6">
+				    		<div class="form-group">
+							    <label for="suplier" style="text-align:center;">Номер документа</label>
+							    <input type="text" asp-for="DocumentNumber" class="form-control" readonly>
+							</div> 
+					  </div>
+					   <div class="col-xs-6">
+				    		<div class="form-group">
+							    <label for="suplier" style="text-align:center;">Дата составления</label>
+							    <input type="text" class="form-control" asp-for="Date" asp-format="{0:d}" readonly>
+							</div> 
+					  </div>
+			    	</div>
+			    	</div>
+			    </div>
+		    </div>
+		</div>
+		<div class="container">
+			<table class="table table-bordered" width="100%">
+			  <tr>
+			    <th rowspan="2" valign="top" style="text-align:center;">Номер по порядку</th>
+			    <th rowspan="2" valign="top" style="text-align:center;">Наименование работ (услуг) (в разрезе их подвидов в соответствии с технической спецификацией, заданием, графиком выполнения работ (услуг) при их наличии)</th> 
+			    <th rowspan="2" valign="top" style="text-align:center;">Дата выполнения работ (оказания услуг)</th>
+			    <th rowspan="2" valign="top" style="text-align:center;">Сведения об отчете о научных исследованиях, маркетинговых, консультативных и прочих услугах (дата, номер, количество страниц) (при их наличии)</th>
+			    <th rowspan="2" valign="top" style="text-align:center;">Единица измерения</th>
+			    <th  valign="top" colspan="3" style="text-align:center;">Выполнено работ (оказано услуг)</th>
+			  </tr>
+              <tr>
+				  <th valign="top" style="text-align:center;">Количество</th>
+				  <th valign="top" style="text-align:center;">Цена за единицу</th>
+				  <th valign="top" style="text-align:center;">Стоимость</th>
+              </tr>
+			  <tr>
+			  </tr>
+			  <tr>
+			    <td align="center">1</td>
+			    <td align="center">2</td> 
+			    <td align="center">3</td>
+			    <td align="center">4</td>
+			    <td align="center">5</td>
+			    <td align="center">6</td>
+			    <td align="center">7</td>
+			    <td align="center">8</td>
+			  </tr>
+			  <tr>
+			    <td align="center"> </td>
+			    <td align="center"> </td> 
+			    <td align="center"> </td>
+			    <td align="center"> </td>
+			    <td align="center">Итого</td>
+			    <td align="center"> </td>
+			    <td align="center">x</td>
+			    <td align="center"><b></b></td>
+			  </tr>
+			</table>
+		</div>
+       <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a asp-action="index" class="btn btn-default">Назад к списку</a>
+                <a asp-action="edit" asp-route-id="@Model.Id" class="btn btn-default">Изменить </a>
+                <a asp-action="delete" asp-route-id="@Model.Id" class="btn btn-default">Удалить</a>
+            </div>
+        </div>
+		</form>
+		</article>
+</section>
