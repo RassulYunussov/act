@@ -2,10 +2,10 @@ namespace act.Models
 {
     public class Service
     {
-        public int Id;
-        public string Name;
-        public decimal Price;
-        public string Measure;
-
+        public int Id {get;set;}
+        public string Name {get;set;}
+        public string ScienceDescription {get;set;}
+        public decimal Price {get;set;}
+        public string Measure {get;set;}
     }
 }

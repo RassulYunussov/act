@@ -14,14 +14,10 @@ namespace act.Controllers
     public class ActController:Controller
     {
         ApplicationDbContext _ctx;
-        List<Service> services = new List<Service>();
+       
         public ActController (ApplicationDbContext ctx)
         {
           _ctx = ctx;
-          services.Add(new Service(){Id = 1, Name = "Service 1", Price = 10.0M, Measure = "ед."});
-          services.Add(new Service(){Id = 2, Name = "Service 2", Price = 20.0M, Measure = "шт."});
-          services.Add(new Service(){Id = 3, Name = "Service 3", Price = 30.0M, Measure = "ед."});
-          services.Add(new Service(){Id = 4, Name = "Service 4", Price = 40.0M, Measure = "ед."});
         }
         public async Task<IActionResult> Index()
         {
@@ -38,7 +34,6 @@ namespace act.Controllers
         }
         public IActionResult Create()
         {
-            ViewBag.services = services;
             return View();
         }
         [HttpPost]
@@ -57,14 +52,14 @@ namespace act.Controllers
                     if(alreadyExist)
                     {
                         ModelState.AddModelError("DocumentNumber","Документ с таким номером уже существует");
-                        return View(act);
+                        return View();
                     }   
                 }
                 foreach(var s in service)
                 {
                     if(s.Checked)
                     {
-                        ActService actService = new ActService(){Name=this.services[s.Id].Name,Price=this.services[s.Id].Price,Amount=s.Amount};
+                        ActService actService = new ActService(){Name=s.Name,Price=s.Price,Amount=s.Amount};
                         act.Services.Add(actService);
                     }
                 }
@@ -73,8 +68,7 @@ namespace act.Controllers
                 return RedirectToAction("index");
             }
             else
-                return View(act);
-            
+                return View();
         }
         public async Task<IActionResult> Edit(int id)
         {

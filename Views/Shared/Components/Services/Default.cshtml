@@ -1,0 +1,32 @@
+@model IEnumerable<act.Models.Service>
+@{
+    int counter = 0;
+    @foreach(var s in @Model)
+    {
+        <tr>
+            <td align="center">
+                <input type="hidden" name="service[@counter].Id" value="@s.Id"/>
+                <input  type="checkbox" name="service[@counter].Checked" checked value="true"/>
+            </td>
+            <td><input type="text" name="service[@counter].Name" value="@s.Name"/></td> 
+            <td><input type="date" style="text-align:right;" name="service[@counter].Date" value="@System.DateTime.Now.ToString("yyyy-MM-dd")"/></td>
+            <td><input type="text" name="service[@counter].Science" /></td>
+            <td align="center">@s.Measure</td>
+            <td align="right"><input type="number" style="text-align:right;"  name="service[@counter].Amount" value="1" min="1"/></td>
+            <td align="right"><input type="hidden" name="service[@counter].Price" value="@s.Price"/>@s.Price</td>
+            <td align="right">@s.Price</td>
+        </tr>
+        counter++;
+    }
+    
+}
+<tr>
+    <td align="center"></td>
+    <td align="center"></td> 
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center">Итого</td>
+    <td align="center"></td>
+    <td align="center">x</td>
+    <td align="right"><b>@Model.Sum(x=>x.Price)</b></td>
+</tr>

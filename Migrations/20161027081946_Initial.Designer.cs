@@ -8,8 +8,8 @@ using act.Data;
 namespace act.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161026084932_initial")]
-    partial class initial
+    [Migration("20161027081946_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,7 +55,25 @@ namespace act.Migrations
 
                     b.HasIndex("ActId");
 
-                    b.ToTable("ActService");
+                    b.ToTable("ActServices");
+                });
+
+            modelBuilder.Entity("act.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Measure");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("ScienceDescription");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("act.Models.ActService", b =>

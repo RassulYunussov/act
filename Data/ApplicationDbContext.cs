@@ -7,6 +7,7 @@ namespace act.Data
     {
         public DbSet<Act> Acts {get;set;}
         public DbSet<ActService> ActServices {get;set;}
+        public DbSet<Service> Services {get;set;}
         public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options):base(options)
         {
             

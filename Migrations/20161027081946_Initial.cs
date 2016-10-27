@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace act.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,23 @@ namespace act.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActService",
+                name: "Services",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Autoincrement", true),
+                    Measure = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    ScienceDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActServices",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -39,9 +55,9 @@ namespace act.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActService", x => x.Id);
+                    table.PrimaryKey("PK_ActServices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActService_Acts_ActId",
+                        name: "FK_ActServices_Acts_ActId",
                         column: x => x.ActId,
                         principalTable: "Acts",
                         principalColumn: "Id",
@@ -49,15 +65,18 @@ namespace act.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActService_ActId",
-                table: "ActService",
+                name: "IX_ActServices_ActId",
+                table: "ActServices",
                 column: "ActId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActService");
+                name: "ActServices");
+
+            migrationBuilder.DropTable(
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "Acts");

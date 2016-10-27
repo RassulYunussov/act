@@ -54,7 +54,25 @@ namespace act.Migrations
 
                     b.HasIndex("ActId");
 
-                    b.ToTable("ActService");
+                    b.ToTable("ActServices");
+                });
+
+            modelBuilder.Entity("act.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Measure");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("ScienceDescription");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("act.Models.ActService", b =>
