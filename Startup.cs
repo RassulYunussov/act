@@ -58,7 +58,7 @@ namespace act
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Act}/{action=Index}/{id?}");
             });
         }
     }

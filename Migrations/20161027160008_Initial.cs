@@ -14,6 +14,9 @@ namespace act.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
+                    AgreementDate = table.Column<DateTime>(nullable: false),
+                    AgreementNumber = table.Column<uint>(nullable: false),
+                    AgreementPrefix = table.Column<string>(nullable: true),
                     ClientBin = table.Column<string>(nullable: true),
                     ClientName = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),

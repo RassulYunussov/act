@@ -20,6 +20,12 @@ namespace act.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("AgreementDate");
+
+                    b.Property<uint>("AgreementNumber");
+
+                    b.Property<string>("AgreementPrefix");
+
                     b.Property<string>("ClientBin");
 
                     b.Property<string>("ClientName");

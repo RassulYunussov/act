@@ -80,7 +80,6 @@ namespace act.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Act act)
         {
-
             if(ModelState.IsValid)
             {
                 try

@@ -8,7 +8,7 @@ using act.Data;
 namespace act.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161027081946_Initial")]
+    [Migration("20161027160008_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,12 @@ namespace act.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AgreementDate");
+
+                    b.Property<uint>("AgreementNumber");
+
+                    b.Property<string>("AgreementPrefix");
 
                     b.Property<string>("ClientBin");
 

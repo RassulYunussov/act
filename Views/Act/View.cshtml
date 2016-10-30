@@ -3,65 +3,95 @@
 		<article>
 		<H1>Просмотр Акта</H1>
 		<hr>
-		<form asp-action="create" method="post">
 		<div class="container">
 			<div class="row">
 			    <div class="col-md-8">
-						<div class="form-group">
-						    <label for="customer">Заказчик</label>
-						    <input type="text" class="form-control" asp-for="ClientName" readonly>
-						</div> 
+								<div class="row">
+									<label class="col-md-8">Заказчик</label>
+								</div>
+								<div class="row">
+									<span class="col-md-8">@Model.ClientName</span>
+								</div>
 			    </div>
 				<div class="col-md-4">
-					  <div class="form-group">
-					    <label for="exampleInputEmail1">ИИН/БИН</label>
-					    <input type="text" class="form-control" asp-for="ClientBin"  readonly>
+					  <div class="row">
+					    <label class="col-md-4">ИИН/БИН</label>
+						</div>
+						<div class="row">
+					   	<span class="col-md-4">@Model.ClientBin</span>
 					  </div>
 			    </div>	
 			    <div class="col-md-8">
-						<div class="form-group">
-						    <label for="suplier">Исполнитель</label>
-						    <input type="text" class="form-control" asp-for="SupplierName" readonly>
+						<div class="row">
+						    <label class="col-md-8">Исполнитель</label>
+						</div>
+						<div class="row">
+						   	<span class="col-md-4">@Model.SupplierName</span>
 						</div> 
 			    </div>
 				<div class="col-md-4">
-					  <div class="form-group">
-					    <label for="exampleInputEmail1">ИИН/БИН</label>
-					    <input type="text" class="form-control" asp-for="SupplierBin" readonly">
+					  <div class="row">
+					    <label class="col-md-4">ИИН/БИН</label>
+						</div>
+						<div class="row">
+							<span class="col-md-4">@Model.SupplierBin</span>
 					  </div>
 			    </div>	
 		    </div>
+				@if(Model.AgreementPrefix!=String.Empty||Model.AgreementNumber!=null||Model.AgreementDate!=null)
+				{
+				<div class="row">
+					 <div class="form-group col-md-8">
+                    <fieldset>
+                        <label><strong>Договор </strong></label>
+												<span>@Model.AgreementPrefix</span> 
+                        <label><strong>№</strong></label>
+                        <span>@Model.AgreementNumber</span>
+                  			<label><strong>Дата договора</strong></label>
+												<span>@Model.AgreementDate</span>
+                    </fieldset>
+            </div> 
+				</div>
+				}
 		    <div class="row">
 			    <div class="col-md-8" style="text-align:center">
 			    	<span>Акт выполненных работ (оказанных услуг)</span>
 			    </div>
 
 		    </div>
-		     <div class="row">
+		      <div class="row">
 			    <div class="col-md-8">
-			    </div>
+			  </div>
 			 	<div class="col-md-4">
-			    	<div class="container-fluid">
 			    	<div class="row">
 			    	  <div class="col-xs-6">
-				    		<div class="form-group">
-							    <label for="suplier" style="text-align:center;">Номер документа</label>
-							    <input type="text" asp-for="DocumentNumber" class="form-control" readonly>
+				    		<div class="row">
+									<div class="col-xs-6">
+							    	<label style="text-align:center;">Номер документа</label>
+									</div>
+									<div class="col-xs-6">
+							    	<label style="text-align:center;">Дата составления</label>
+									</div>
+							  </div>
+								<div class="row">
+									<div class="col-xs-6">
+								  	<span class="col-xs-6" style="text-align:center;">@Model.DocumentNumber</span>
+								  </div>
+									<div class="col-xs-6">
+								  	<span class="col-xs-6" style="text-align:center;">@Model.Date.ToString("d")</span>
+								  </div>
+								</div>
 							</div> 
 					  </div>
-					   <div class="col-xs-6">
-				    		<div class="form-group">
-							    <label for="suplier" style="text-align:center;">Дата составления</label>
-							    <input type="text" class="form-control" asp-for="Date" asp-format="{0:d}" readonly>
-							</div> 
-					  </div>
-			    	</div>
-			    	</div>
 			    </div>
 		    </div>
 		</div>
+		<div class="row">
+		<br/>
+		</div>
+		<div class="row">
 		<div class="container">
-			<table class="table table-bordered" width="100%">
+			<table class="table table-bordered">
 			  <tr>
 			    <th rowspan="2" valign="top" style="text-align:center;">Номер по порядку</th>
 			    <th rowspan="2" valign="top" style="text-align:center;">Наименование работ (услуг) (в разрезе их подвидов в соответствии с технической спецификацией, заданием, графиком выполнения работ (услуг) при их наличии)</th> 
@@ -116,13 +146,13 @@
 			  </tr>
 			</table>
 		</div>
-       <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <a asp-action="index" class="btn btn-default">Назад к списку</a>
-                <a asp-action="edit" asp-route-id="@Model.Id" class="btn btn-default">Изменить </a>
-                <a asp-action="delete" asp-route-id="@Model.Id" class="btn btn-default">Удалить</a>
-            </div>
-        </div>
-		</form>
-		</article>
+		<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+						<a asp-action="index" class="btn btn-default">Назад к списку</a>
+						<a asp-action="edit" asp-route-id="@Model.Id" class="btn btn-default">Изменить </a>
+						<a asp-action="delete" asp-route-id="@Model.Id" class="btn btn-default">Удалить</a>
+				</div>
+		</div>
+	</div>
+</article>
 </section>

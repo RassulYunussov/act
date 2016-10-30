@@ -8,12 +8,15 @@ namespace act.Models
     public class Act
     {
         public int Id {get;set;}
-        public int? DocumentNumber {get;set;}
+        public uint? DocumentNumber {get;set;}
         public DateTime Date {get;set;}
         public string SupplierName {get;set;}
         public string ClientName {get;set;}
         public string SupplierBin {get;set;}
         public string ClientBin {get;set;}
+        public string AgreementPrefix {get;set;}
+        public uint? AgreementNumber {get;set;}
+        public DateTime? AgreementDate {get;set;}
 
         public virtual ICollection<ActService> Services {get;set;}
 
